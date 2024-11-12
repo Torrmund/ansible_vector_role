@@ -1,0 +1,9 @@
+---
+- name: Generate Vector configuration
+  template:
+    src: vector_config.yaml.j2
+    dest: /etc/vector/vector.yaml
+    mode: "0644"
+    owner: {{ vector_systemd_user }}
+    group: {{ vector_systemd_group }}
+  notify: Restart vector service

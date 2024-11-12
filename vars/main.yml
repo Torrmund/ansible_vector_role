@@ -1,0 +1,3 @@
+---
+
+vector_clickhouse_connection_url: http://{{ vector_clickhouse_connection_ip }}:8123

@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name: vector_role
+  author: Aleksandr Emelyanov
+  description: "Install Vector and configure it to send logs from files to clickhouse"
+  company: none
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+  galaxy_tags: []
+dependencies: []

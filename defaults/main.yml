@@ -1,0 +1,24 @@
+---
+
+vector_systemd_user: vector
+vector_systemd_group: vector
+
+vector_version: "0.42.0"
+
+sources:
+  nginx_access_logs:
+    include:
+      - /var/log/nginx/access.log
+    read_from: end
+
+transforms:
+  - name: parse_nginx
+    type: "remap"
+    inputs:
+      - nginx_access_logs
+    source: |
+      . = parse_nginx_log!(.message, "combined")
+
+vector_clickhouse_connection_ip: "localhost"
+vector_clickhouse_connection_database_name: "logs"
+vector_clickhouse_connection_table_name: "logs"

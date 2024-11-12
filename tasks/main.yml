@@ -1,0 +1,9 @@
+---
+- import_tasks: install.yml
+
+- name: Ensure Vector systemd enabled & started
+  systemd:
+    name: vector.service
+    enabled: true
+    daemon_reload: true
+    state: started

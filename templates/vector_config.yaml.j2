@@ -1,0 +1,47 @@
+---
+sources:
+{% for source_name, source_details in sources.items() %}
+  {{ source_name }}:
+    type: "file"
+    include:
+      {% for file in source_details.include %}
+      - {{ file }}
+      {% endfor %}
+    read_from: {{ source_details.read_from }}
+{% endfor %}
+
+transforms:
+{% for transform in transforms %}
+  {{ transform.name }}:
+    type: "{{ transform.type }}"
+    inputs:
+    {% for input in transform.inputs %}
+      - {{ input }}
+    {% endfor %}
+    source: |
+      {{ transform.source | indent(6) }}
+{% endfor %}
+
+sinks:
+  clickhouse:
+    type: "clickhouse"
+    inputs:
+    {% for transform in transforms %}
+      - {{ transform.name }}
+    {% endfor %}
+    endpoint: {{ vector_clickhouse_connection_url }}
+    database: {{ vector_clickhouse_connection_database_name }}
+    table: {{ vector_clickhouse_connection_table_name }}
+    skip_unknown_fields: true
+    encoding:
+      timestamp_format: "unix"
+    request:
+      settings:
+        input_format_skip_unknown_fields: 1
+
+  console:
+    type: "console"
+    inputs:
+      - parse_nginx
+    encoding:
+      codec: json
