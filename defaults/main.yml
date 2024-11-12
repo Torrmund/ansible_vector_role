@@ -5,13 +5,13 @@ vector_systemd_group: vector
 
 vector_version: "0.42.0"
 
-sources:
+vector_sources:
   nginx_access_logs:
     include:
       - /var/log/nginx/access.log
     read_from: end
 
-transforms:
+vector_transforms:
   - name: parse_nginx
     type: "remap"
     inputs:
@@ -22,3 +22,7 @@ transforms:
 vector_clickhouse_connection_ip: "localhost"
 vector_clickhouse_connection_database_name: "logs"
 vector_clickhouse_connection_table_name: "logs"
+
+vector_clickhouse_auth_required: false
+vector_clickhouse_connection_user: ""
+vector_clickhouse_connection_password: ""

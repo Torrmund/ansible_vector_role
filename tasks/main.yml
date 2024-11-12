@@ -1,5 +1,6 @@
 ---
-- import_tasks: install.yml
+- name: Install Vector
+  import_tasks: install.yml
 
 - name: Ensure Vector systemd enabled & started
   systemd:

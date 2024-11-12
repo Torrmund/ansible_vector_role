@@ -16,7 +16,6 @@ Requirements
 
 Совместимость роли проверена только для платформ, указанных в meta.
 
-
 Role Variables
 --------------
 
@@ -25,11 +24,14 @@ Role Variables
 | `vector_systemd_user`                        | vector                     | Пользователь, от имени которого будет запускаться Vector                                                                                                               |
 | `vector_systemd_group`                       | vector                     | Группа от имени которой будет запускаться Vector                                                                                                                              |
 | `vector_version`                             | "0.42.0"                   | Версия Vector для установки                                                                                                                                                                     |
-| `sources`                                    | см. в defaults/main.yml | Перечень источников логов, в роли которых выступают файлы.<br />Этот перечень в последствии передается в конфиг Vector. |
-| `transforms`                                 | см. в defaults/main.yml | Перечень трансформирования логов для отправки в Clickhouse                                                                                                              |
+| `vector_sources`                             | см. в defaults/main.yml | Перечень источников логов, в роли которых выступают файлы.<br />Этот перечень в последствии передается в конфиг Vector. |
+| `vector_transforms`                          | см. в defaults/main.yml | Перечень трансформирования логов для отправки в Clickhouse                                                                                                              |
 | `vector_clickhouse_connection_ip`            | "localhost"                | IP адрес сервера Clickhouse для подключения к нему Vector                                                                                                                          |
 | `vector_clickhouse_connection_database_name` | "logs"                     | Имя базы данных Clickhouse в которую будут отправляться логи.                                                                                                           |
 | `vector_clickhouse_connection_table_name`    | "logs"                     | Имя таблицы Clickhouse, в которую будут отправляться логи.                                                                                                                 |
+| `vector_clickhouse_auth_required`            | false                      | Ключ. Указывает, требуется ли аутентификация при подключении к Clickhouse                                                                                    |
+| `vector_clickhouse_connection_user`          | ""                         | Имя пользователя при аутентификатции в Clickhouse                                                                                                                               |
+| `vector_clickhouse_connection_password`      | ""                         | Пароль при аутентификации в Clickhouse                                                                                                                                                    |
 
 Dependencies
 ------------
@@ -43,7 +45,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: vector
       roles:
-         - rolename
+         - vector
 
 License
 -------
