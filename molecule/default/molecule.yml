@@ -33,7 +33,7 @@ platforms:
 
   - name: molecule-ubuntu-jammy
     groups:
-      - fedora
+      - jammy
     source:
       alias: jammy/amd64
       type: image

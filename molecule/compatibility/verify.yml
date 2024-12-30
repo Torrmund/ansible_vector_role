@@ -1,0 +1,14 @@
+---
+- name: Verify vector-role functionality
+  hosts: all
+  tasks:
+    - name: Check that the configuration file exists
+      stat:
+        path: /etc/vector/vector.yaml 
+      register: config_file
+
+    - name: Assert that the configuration file exists
+      assert:
+        that:
+          - config_file.stat.exists
+        fail_msg: "Configuration file does not exists"
