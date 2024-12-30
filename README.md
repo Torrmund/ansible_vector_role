@@ -32,6 +32,7 @@ Role Variables
 | `vector_clickhouse_auth_required`            | false                      | Ключ. Указывает, требуется ли аутентификация при подключении к Clickhouse                                                                                    |
 | `vector_clickhouse_connection_user`          | ""                         | Имя пользователя при аутентификатции в Clickhouse                                                                                                                               |
 | `vector_clickhouse_connection_password`      | ""                         | Пароль при аутентификации в Clickhouse                                                                                                                                                    |
+| `vector_config_custom`                       | false                      | Ключ. Указывает, использовать ли кастомную конфигурацию Vector или применить<br />конфигурацию по умолчанию.                   |
 
 Dependencies
 ------------

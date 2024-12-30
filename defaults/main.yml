@@ -26,3 +26,5 @@ vector_clickhouse_connection_table_name: "logs"
 vector_clickhouse_auth_required: false
 vector_clickhouse_connection_user: ""
 vector_clickhouse_connection_password: ""
+
+vector_config_custom: false

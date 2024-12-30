@@ -1,4 +1,14 @@
 ---
+- name: Copy Vector default configuration
+  copy:
+    src: files/vector.yaml
+    dest: /etc/vector/vector.yaml
+    mode: "0644"
+    owner: "{{ vector_systemd_user }}"
+    group: "{{ vector_systemd_group }}"
+  notify: Restart vector service
+  when: not vector_config_custom | bool
+
 - name: Generate Vector configuration
   template:
     src: vector_config.yaml.j2
@@ -7,3 +17,4 @@
     owner: "{{ vector_systemd_user }}"
     group: "{{ vector_systemd_group }}"
   notify: Restart vector service
+  when: vector_config_custom | bool
