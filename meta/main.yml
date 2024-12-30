@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: vector_role
+  namespace: torrmund
   author: Aleksandr Emelyanov
   description: "Install Vector and configure it to send logs from files to clickhouse"
   company: none

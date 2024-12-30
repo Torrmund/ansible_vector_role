@@ -1,0 +1,37 @@
+---
+- name: Verify vector-role functionality
+  hosts: all
+  tasks:
+    - name: Check that the configuration file exists
+      stat:
+        path: /etc/vector/vector.yaml 
+      register: config_file
+
+    - name: Assert that the configuration file exists
+      assert:
+        that:
+          - config_file.stat.exists
+        fail_msg: "Configuration file does not exists"
+
+    - name: Check the syntax of the configuration file
+      command: /usr/bin/vector validate /etc/vector/vector.yaml
+      register: config_check_result
+      ignore_errors: yes
+
+    - name: Assert that the configuration syntax is valid
+      assert:
+        that:
+          - config_check_result.rc == 0
+        fail_msg: "Configuration file have errors!"
+
+    - name: Check service status
+      systemd:
+        name: vector
+        state: started
+      register: service_status
+
+    - name: Assert that the vector service is running
+      assert:
+        that:
+          - service_status is not failed
+        fail_msg: "Vector service is not running!"

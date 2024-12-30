@@ -1,0 +1,61 @@
+---
+dependency:
+  enabled: false
+
+driver:
+  name: lxd
+
+platforms:
+  - name: molecule-ubuntu-focal
+    groups:
+      - debian
+    source:
+      alias: focal/amd64
+      type: image
+      mode: pull
+      server: https://cloud-images.ubuntu.com/minimal/releases/
+      protocol: simplestreams
+    config:
+      limits.cpu: "1"
+    profiles:
+      - default
+    devices:
+      root:
+        path: /
+        pool: default
+        size: 512MB
+        type: disk
+      eth0:
+        nictype: bridged
+        parent: lxdbr0
+        type: nic
+    force_stop: yes
+
+  - name: molecule-ubuntu-jammy
+    groups:
+      - fedora
+    source:
+      alias: jammy/amd64
+      type: image
+      mode: pull
+      server: https://cloud-images.ubuntu.com/minimal/releases/
+      protocol: simplestreams
+    config:
+      limits.cpu: "1"
+    profiles:
+      - default
+    devices:
+      root:
+        path: /
+        pool: default
+        size: 512MB
+        type: disk
+      eth0:
+        nictype: bridged
+        parent: lxdbr0
+        type: nic
+    force_stop: yes
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
