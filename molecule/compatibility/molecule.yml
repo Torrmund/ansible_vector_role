@@ -1,13 +1,34 @@
 ---
 dependency:
   name: galaxy
+  enabled: false
 driver:
-  name: podman
+  name: lxd
 platforms:
-  - name: instance
-    image: ubuntu/python:3.8-20.04_stable
-    pre_build_image: true
-    priveleged: true
+  - name: molecule-ubuntu-focal
+    groups:
+      - debian
+    source:
+      alias: focal/amd64
+      type: image
+      mode: pull
+      server: https://cloud-images.ubuntu.com/minimal/releases/
+      protocol: simplestreams
+    config:
+      limits.cpu: "1"
+    profiles:
+      - default
+    devices:
+      root:
+        path: /
+        pool: default
+        size: 512MB
+        type: disk
+      eth0:
+        nictype: bridged
+        parent: lxdbr0
+        type: nic
+    force_stop: yes
 provisioner:
   name: ansible
 verifier:

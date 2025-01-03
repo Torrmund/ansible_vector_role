@@ -1,5 +1,2 @@
-selinux
-lxml
 molecule
-molecule_podman
-jmespath
+-e git+https://github.com/nextlayer-ansible/molecule-lxd.git@main#egg=molecule-lxd
