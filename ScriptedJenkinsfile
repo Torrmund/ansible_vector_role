@@ -1,0 +1,27 @@
+node("agent-lxd-1") {
+       stage("Git checkout") {
+           git credentialsId: '5ac0095d-0185-431b-94da-09a0ad9b0e2c', url: 'https://github.com/aragastmatb/example-playbook.git'
+       }
+       
+       stage("Sample define secret_check") {
+           secret_check = true
+       }
+       
+       stage("Run playbook") {
+           echo "prod_run is: ${prod_run}"
+           
+           def isProdRun = prod_run == 'true'
+           
+           if (secret_check) {
+               if (isProdRun) {
+                   // Запускаем ansible-playbook без флагов --check и --diff
+                   sh 'ansible-playbook site.yml -i inventory/prod.yml'
+               } else {
+                   // Запускаем ansible-playbook с флагами --check и --diff
+                   sh 'ansible-playbook --check --diff site.yml -i inventory/prod.yml'
+               }
+           } else {
+               echo 'need more action'
+           }
+       }
+   }
