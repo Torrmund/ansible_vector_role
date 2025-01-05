@@ -1,4 +1,4 @@
 tox
-ansible==6.7.0
-molecule==4.0.4
+ansible==10.7.0
+molecule==24.12.0
 git+https://github.com/nextlayer-ansible/molecule-lxd.git@main#egg=molecule-lxd
